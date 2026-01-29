@@ -11,48 +11,44 @@ public class Arrays07TempMedia {
 	 * carácter.
 	 */
 
-	public static void main(String[] args) {
+	public static void main(String[] args); {
 		
-		Scanner lector = new Scanner(System.in);
-		
-		String[] meses = {"Enero", "febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
-		
-		double[] temperaturas = new double[meses.length];
-		int posicion;
-		int posicionAsterisco; 
-		int numAsteriscos;
+	         Scanner lector = new Scanner(System.in); {
+			String[] meses = {"Enero", "febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
 			
-		
-	    System.out.println("Introduce la temperatura media de cada mes del año ");		
-	    System.out.println("---------------------------------------------------");
-	    
-	    for (posicion = 0; posicion < meses.length ; posicion++ ) {
-	    	System.out.println("Temperatura media de "+ meses [posicion] + " : ");
-	    	temperaturas[posicion] = lector.nextDouble();
-	    	
-	    }
-	    
-	    for (posicion = 0; posicion < meses.length ; posicion++ ) {
-	    	
-	    	System.out.println(meses[posicion] + " : ");
-	    	
-	    	//cacular el numero de asteriscos que va a tener la figura
-	    	
-	    }
-	    
-	    	numAsteriscos = (int) temperaturas[posicion]; {
-	    			
-	    	//Dibujamos la barra
-	    			
-	    	for (posicionAsterisco = 0; posicionAsterisco < numAsteriscos; posicionAsterisco++ ) {	
-	    	System.out.print(" * ");
-	    	
-	    }
-	    
-	    lector.close();
-	}
+			double[] temperaturas = new double[meses.length];
+			int posicion;
+			int posicionAsterisco; 
+			int numAsteriscos;
+				
+			
+			System.out.println("Introduce la temperatura media de cada mes del año ");		
+			System.out.println("---------------------------------------------------");
+			
+						
+				//Dibujamos la barra
+						
+					for (posicion = 0; posicion < meses.length; posicion++) {
+
+					    System.out.print(meses[posicion] + " : ");
+
+					    // calcular el numero de asteriscos
+					    numAsteriscos = (int) temperaturas[posicion];
+
+					    // dibujar la barra
+					    for (posicionAsterisco = 0; posicionAsterisco < numAsteriscos; posicionAsterisco++) {
+					        System.out.print("*");
+					    }
+
+					    System.out.println(); // salto de línea
+					}
+					} 
+
+				lector.close();
+		}
 
  }
 	
-}
+	
+
 	
