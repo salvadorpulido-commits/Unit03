@@ -13,7 +13,7 @@ public class Ejercicio1_CajaBuena {
     static final int TAM_STOCK = 200;
     static final int STOCK_INICIAL = 10;
 
-    // Scanner único y nombrado correctamente para evitar confusiones.
+    // Scanner unico y nombrado correctamente para evitar confusiones.
     
     static Scanner sc = new Scanner(System.in);
 
@@ -91,7 +91,7 @@ public class Ejercicio1_CajaBuena {
             System.out.println(mensaje);
 
             if (!sc.hasNextInt()) {
-                // LÍNEA CLAVE: controla letras
+                // lanza mensaje para error de introducir datos no validos
                 System.out.println("Cantidad errónea, introduzca un número válido.");
                 sc.nextLine(); // limpiar entrada incorrecta
             } else {
@@ -117,6 +117,7 @@ public class Ejercicio1_CajaBuena {
         while (!valido) {
             System.out.println(mensaje);
 
+            // lanza mensaje para error de introducir datos no validos
             if (!sc.hasNextDouble()) {
                 System.out.println("Cantidad errónea, introduzca un número válido.");
                 sc.nextLine();
@@ -152,6 +153,7 @@ public class Ejercicio1_CajaBuena {
                 }
             }
 
+            // lanza mensaje para error de introducir datos no validos
             if (!valido || nombre.isEmpty()) {
                 System.out.println("Nombre inválido. Solo letras.");
             }
@@ -236,3 +238,4 @@ public class Ejercicio1_CajaBuena {
         System.out.println("==============================");
     }
 }
+
