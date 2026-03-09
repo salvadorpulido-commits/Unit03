@@ -16,26 +16,29 @@ public static void main(String[] args) {
 
 
 		
-     Scanner sc = new Scanner(System.in);
-     double[] numeros = new double[5];
-     int i;
+     try (Scanner sc = new Scanner(System.in)) {
+		double[] numeros = new double[5];
+		 int i;
 
-     // Pedir y guardar los números
-	    for (i = 0; i < 5; i++) {
-		System.out.print("Introduce un número decimal: ");
-		numeros[i] = sc.nextDouble();
-		
-		}
+		 // Pedir y guardar los números
+		    for (i = 0; i < 5; i++) {
+			System.out.print("Introduce un número decimal: ");
+			numeros[i] = sc.nextDouble();
+			
+			}
 
-	 // Mostrar los números
-		System.out.println("\nLos números introducidos son:");
-		for (i = 0; i < 5; i++) {
-		System.out.println(numeros[i]);
-		
-		}
+		 // Mostrar los números
+			System.out.println("\nLos números introducidos son:");
+			for (i = 0; i < 5; i++) {
+			System.out.println(numeros[i]);
+			
+			}
 
-	    sc.close();
-	    
+			 sc.close();
+	 }
 	    }
+        
+        
+
  }
 

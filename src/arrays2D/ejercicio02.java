@@ -16,11 +16,16 @@ public class ejercicio02 {
 		imprimirMatriz(matriz);
 		
 		System.out.println("Transpuesta: ");
-		imprimirMatriz(Transpuesta);
+		imprimirMatriz(transpuesta);
 		
 				
 	}
 	
+	private static void imprimirMatriz(int[][] matriz) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	/**
 	 * FUncion que transpone una matriz rectangular
 	 * @param matriz array bidimensional
