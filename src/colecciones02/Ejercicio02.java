@@ -26,5 +26,7 @@ public class Ejercicio02 {
         
         // 3. Imprimimos el resultado
         System.out.println("Números generados: " + numeros);
+        
+        
     }
 }
