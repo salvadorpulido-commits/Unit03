@@ -28,5 +28,4 @@ package colecciones02;
 	        System.out.println("Lista mezclada: " + listaNumeros);
 	    }
 
-
 }
