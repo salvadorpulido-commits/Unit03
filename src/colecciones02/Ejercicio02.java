@@ -7,12 +7,12 @@ public class Ejercicio02 {
 
     public static void main(String[] args) {
         
-        // Creamos la colección especial, guarda el orden de llegada y no deja meter  a nadie repetido.
-    	
+        // 1. Creamos la colección especial. 
+        // Piensa en ella como una lista de invitados VIP: guarda el orden de llegada y no deja entrar a nadie repetido.
         LinkedHashSet<Integer> numeros = new LinkedHashSet<>();
         Random generador = new Random();
         
-        // 2. Mientras no tengamos 10 números guardados, seguimos intentando.
+        // 2. Mientras no tengamos 10 números guardados, seguimos intentando...
         while (numeros.size() < 10) {
             
             // Generamos un número del 1 al 20
@@ -20,13 +20,11 @@ public class Ejercicio02 {
             
             // Lo intentamos meter en la colección. 
             // Si ya estaba dentro, la colección lo ignora y el bucle vuelve a dar otra vuelta.
-            
             numeros.add(aleatorio);
         }
         
         // 3. Imprimimos el resultado
         System.out.println("Números generados: " + numeros);
-        
-        
-           }
+    }
+    
 }
