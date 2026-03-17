@@ -7,7 +7,7 @@ public class ejercicioColecciones1 {
 
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);{
         ArrayList<Integer> lista = new ArrayList<Integer>();
         int numero = 0;
         int i = 0;
@@ -28,4 +28,6 @@ public class ejercicioColecciones1 {
 
         sc.close();
     }
+}
+    
 }

@@ -4,238 +4,202 @@ import java.util.Scanner; // Import scanner, en vez de *
 
 public class Ejercicio1_CajaBuena {
 
-    // Constantes claras
-    static final double IVA = 0.21;
-    static final double DESCUENTO_MAS_DE_100 = 0.10;
-    static final double DESCUENTO_POR_SOCIO = 0.05;
-    static final double UMBRAL_DESCUENTO = 100.0;
+	// Constantes claras
+	static final double IVA = 0.21;
+	static final double DESCUENTO_MAS_DE_100 = 0.10;
+	static final double DESCUENTO_POR_SOCIO = 0.05;
+	static final double UMBRAL_DESCUENTO = 100.0;
 
-    static final int TAM_STOCK = 200;
-    static final int STOCK_INICIAL = 10;
+	static final int TAM_STOCK = 200;
+	static final int STOCK_INICIAL = 10;
 
-    // Scanner unico y nombrado correctamente para evitar confusiones.
-    
-    static Scanner sc = new Scanner(System.in);
+	// Scanner unico y nombrado correctamente para evitar confusiones.
 
-    public static void main(String[] args) {
+	static Scanner sc = new Scanner(System.in);
 
-        int[] stock = new int[TAM_STOCK];
-        for (int i = 0; i < stock.length; i++) {
-            stock[i] = STOCK_INICIAL;
-        }
+	public static void main(String[] args) {
 
-        boolean seguirComprando = true;
+		int[] stock = new int[TAM_STOCK];
+		for (int i = 0; i < stock.length; i++) {
+			stock[i] = STOCK_INICIAL;
+		}
 
-        while (seguirComprando) {
+		boolean seguirComprando = true;
 
-            int numeroProductos = leerEnteroEnRango(
-                    "¿Cuántos productos vas a introducir?", 1, 50);
+		while (seguirComprando) {
 
-            String[] nombresProducto = new String[numeroProductos];
-            double[] preciosProducto = new double[numeroProductos];
-            int[] unidadesProducto = new int[numeroProductos];
+			int numeroProductos = leerEnteroEnRango("¿Cuántos productos vas a introducir?", 1, 50);
 
-            double subtotal = 0.0;
+			String[] nombresProducto = new String[numeroProductos];
+			double[] preciosProducto = new double[numeroProductos];
+			int[] unidadesProducto = new int[numeroProductos];
 
-            for (int i = 0; i < numeroProductos; i++) {
+			double subtotal = 0.0;
 
-                nombresProducto[i] = leerNombreProducto(i + 1);
+			for (int i = 0; i < numeroProductos; i++) {
 
-                preciosProducto[i] = leerDoubleMin(
-                        "Precio del producto " + (i + 1) + ":", 0.0);
+				nombresProducto[i] = leerNombreProducto(i + 1);
 
-                unidadesProducto[i] = leerEnteroEnRango(
-                        "Unidades del producto " + (i + 1) + ":", 1, 100);
+				preciosProducto[i] = leerDoubleMin("Precio del producto " + (i + 1) + ":", 0.0);
 
-                subtotal += preciosProducto[i] * unidadesProducto[i];
+				unidadesProducto[i] = leerEnteroEnRango("Unidades del producto " + (i + 1) + ":", 1, 100);
 
-                int indexStock = obtenerIndexStock(nombresProducto[i], i, TAM_STOCK);
-                stock[indexStock] -= unidadesProducto[i];
+				subtotal += preciosProducto[i] * unidadesProducto[i];
 
-                if (stock[indexStock] < 0) {
-                    System.out.println("Aviso: stock negativo (simulación).");
-                }
-            }
+				int indexStock = obtenerIndexStock(nombresProducto[i], i, TAM_STOCK);
+				stock[indexStock] -= unidadesProducto[i];
 
-            boolean esSocio = leerSiNo("¿Es socio?");
+				if (stock[indexStock] < 0) {
+					System.out.println("Aviso: stock negativo (simulación).");
+				}
+			}
 
-            double[] totales = calcularTotales(
-                    subtotal, esSocio,
-                    UMBRAL_DESCUENTO,
-                    DESCUENTO_MAS_DE_100,
-                    DESCUENTO_POR_SOCIO,
-                    IVA);
+			boolean esSocio = leerSiNo("¿Es socio?");
 
-            imprimirTicket(
-                    nombresProducto,
-                    preciosProducto,
-                    unidadesProducto,
-                    subtotal,
-                    totales[0],
-                    totales[1],
-                    totales[2],
-                    totales[3],
-                    totales[4]);
+			double[] totales = calcularTotales(subtotal, esSocio, UMBRAL_DESCUENTO, DESCUENTO_MAS_DE_100,
+					DESCUENTO_POR_SOCIO, IVA);
 
-            seguirComprando = leerSiNo("¿Quieres registrar otra compra?");
-        }
-    }
+			imprimirTicket(nombresProducto, preciosProducto, unidadesProducto, subtotal, totales[0], totales[1],
+					totales[2], totales[3], totales[4]);
 
-    // Lee un entero controlando letras y rango
-    static int leerEnteroEnRango(String mensaje, int min, int max) {
+			seguirComprando = leerSiNo("¿Quieres registrar otra compra?");
+		}
+	}
 
-        int valor = 0;
-        boolean valido = false;
+	// Lee un entero controlando letras y rango
+	static int leerEnteroEnRango(String mensaje, int min, int max) {
 
-        while (!valido) {
-            System.out.println(mensaje);
+		int valor = 0;
+		boolean valido = false;
 
-            if (!sc.hasNextInt()) {
-                // lanza mensaje para error de introducir datos no validos
-                System.out.println("Cantidad errónea, introduzca un número válido.");
-                sc.nextLine(); // limpiar entrada incorrecta
-            } else {
-                valor = sc.nextInt();
-                sc.nextLine(); // limpiar buffer
+		while (!valido) {
+			System.out.println(mensaje);
 
-                if (valor < min || valor > max) {
-                    System.out.println("Valor inválido. Debe estar entre " + min + " y " + max + ".");
-                } else {
-                    valido = true;
-                }
-            }
-        }
-        return valor;
-    }
+			if (!sc.hasNextInt()) {
+				// lanza mensaje para error de introducir datos no validos
+				System.out.println("Cantidad errónea, introduzca un número válido.");
+				sc.nextLine(); // limpiar entrada incorrecta
+			} else {
+				valor = sc.nextInt();
+				sc.nextLine(); // limpiar buffer
 
-    // Lee un double controlando letras
-    static double leerDoubleMin(String mensaje, double min) {
+				if (valor < min || valor > max) {
+					System.out.println("Valor inválido. Debe estar entre " + min + " y " + max + ".");
+				} else {
+					valido = true;
+				}
+			}
+		}
+		return valor;
+	}
 
-        double valor = 0;
-        boolean valido = false;
+	// Lee un double controlando letras
+	static double leerDoubleMin(String mensaje, double min) {
 
-        while (!valido) {
-            System.out.println(mensaje);
+		double valor = 0;
+		boolean valido = false;
 
-            // lanza mensaje para error de introducir datos no validos
-            if (!sc.hasNextDouble()) {
-                System.out.println("Cantidad errónea, introduzca un número válido.");
-                sc.nextLine();
-            } else {
-                valor = sc.nextDouble();
-                sc.nextLine();
+		while (!valido) {
+			System.out.println(mensaje);
 
-                if (valor < min) {
-                    System.out.println("Valor inválido.");
-                } else {
-                    valido = true;
-                }
-            }
-        }
-        return valor;
-    }
+			// lanza mensaje para error de introducir datos no validos
+			if (!sc.hasNextDouble()) {
+				System.out.println("Cantidad errónea, introduzca un número válido.");
+				sc.nextLine();
+			} else {
+				valor = sc.nextDouble();
+				sc.nextLine();
 
-    // Lee y valida el nombre del producto
-    static String leerNombreProducto(int numero) {
+				if (valor < min) {
+					System.out.println("Valor inválido.");
+				} else {
+					valido = true;
+				}
+			}
+		}
+		return valor;
+	}
 
-        String nombre;
-        boolean valido;
+	// Lee y valida el nombre del producto
+	static String leerNombreProducto(int numero) {
 
-        do {
-            System.out.println("Nombre del producto " + numero + ":");
-            nombre = sc.nextLine().trim();
-            valido = true;
+		String nombre;
+		boolean valido;
 
-            for (int i = 0; i < nombre.length(); i++) {
-                char c = nombre.charAt(i);
-                if (!Character.isLetter(c) && c != ' ') {
-                    valido = false;
-                }
-            }
+		do {
+			System.out.println("Nombre del producto " + numero + ":");
+			nombre = sc.nextLine().trim();
+			valido = true;
 
-            // lanza mensaje para error de introducir datos no validos
-            if (!valido || nombre.isEmpty()) {
-                System.out.println("Nombre inválido. Solo letras.");
-            }
+			for (int i = 0; i < nombre.length(); i++) {
+				char c = nombre.charAt(i);
+				if (!Character.isLetter(c) && c != ' ') {
+					valido = false;
+				}
+			}
 
-        } while (!valido || nombre.isEmpty());
+			// lanza mensaje para error de introducir datos no validos
+			if (!valido || nombre.isEmpty()) {
+				System.out.println("Nombre inválido. Solo letras.");
+			}
 
-        return nombre;
-    }
+		} while (!valido || nombre.isEmpty());
 
-    // Lee S o N
-    static boolean leerSiNo(String mensaje) {
+		return nombre;
+	}
 
-        String respuesta;
+	// Lee S o N
+	static boolean leerSiNo(String mensaje) {
 
-        do {
-            System.out.println(mensaje + " (S/N)");
-            respuesta = sc.nextLine().trim();
-        } while (!respuesta.equalsIgnoreCase("S")
-                && !respuesta.equalsIgnoreCase("N"));
+		String respuesta;
 
-        return respuesta.equalsIgnoreCase("S");
-    }
+		do {
+			System.out.println(mensaje + " (S/N)");
+			respuesta = sc.nextLine().trim();
+		} while (!respuesta.equalsIgnoreCase("S") && !respuesta.equalsIgnoreCase("N"));
 
-    // Simulación de índice de stock
-    static int obtenerIndexStock(String nombreProducto, int posicion, int tamStock) {
-        return (nombreProducto.length() * 17 + posicion * 3) % tamStock;
-    }
+		return respuesta.equalsIgnoreCase("S");
+	}
 
-    // Cálculo de totales
-    static double[] calcularTotales(double subtotal,
-                                    boolean esSocio,
-                                    double umbral,
-                                    double descSubtotal,
-                                    double descSocio,
-                                    double iva) {
+	// Simulación de índice de stock
+	static int obtenerIndexStock(String nombreProducto, int posicion, int tamStock) {
+		return (nombreProducto.length() * 17 + posicion * 3) % tamStock;
+	}
 
-        double descuentoImporte = subtotal > umbral ? subtotal * descSubtotal : 0.0;
-        double subtotalConDescuento = subtotal - descuentoImporte;
+	// Cálculo de totales
+	static double[] calcularTotales(double subtotal, boolean esSocio, double umbral, double descSubtotal,
+			double descSocio, double iva) {
 
-        double descuentoSocio = esSocio ? subtotalConDescuento * descSocio : 0.0;
+		double descuentoImporte = subtotal > umbral ? subtotal * descSubtotal : 0.0;
+		double subtotalConDescuento = subtotal - descuentoImporte;
 
-        double baseImponible = subtotalConDescuento - descuentoSocio;
-        double importeIva = baseImponible * iva;
-        double total = baseImponible + importeIva;
+		double descuentoSocio = esSocio ? subtotalConDescuento * descSocio : 0.0;
 
-        return new double[] {
-                descuentoImporte,
-                descuentoSocio,
-                baseImponible,
-                importeIva,
-                total
-        };
-    }
+		double baseImponible = subtotalConDescuento - descuentoSocio;
+		double importeIva = baseImponible * iva;
+		double total = baseImponible + importeIva;
 
-    // Imprime el ticket
-    static void imprimirTicket(String[] nombres,
-                               double[] precios,
-                               int[] unidades,
-                               double subtotal,
-                               double descuento1,
-                               double descuento2,
-                               double baseImponible,
-                               double iva,
-                               double total) {
+		return new double[] { descuentoImporte, descuentoSocio, baseImponible, importeIva, total };
+	}
 
-        System.out.println("=========== TICKET ===========");
+	// Imprime el ticket
+	static void imprimirTicket(String[] nombres, double[] precios, int[] unidades, double subtotal, double descuento1,
+			double descuento2, double baseImponible, double iva, double total) {
 
-        for (int i = 0; i < nombres.length; i++) {
-            double linea = precios[i] * unidades[i];
-            System.out.println((i + 1) + ") " + nombres[i]
-                    + "  " + unidades[i] + " x " + precios[i]
-                    + " = " + linea);
-        }
+		System.out.println("=========== TICKET ===========");
 
-        System.out.println("------------------------------");
-        System.out.println("SUBTOTAL: " + subtotal);
-        System.out.println("DESC IMPORTE: " + descuento1);
-        System.out.println("DESC SOCIO: " + descuento2);
-        System.out.println("BASE: " + baseImponible);
-        System.out.println("IVA: " + iva);
-        System.out.println("TOTAL: " + total);
-        System.out.println("==============================");
-    }
+		for (int i = 0; i < nombres.length; i++) {
+			double linea = precios[i] * unidades[i];
+			System.out.println((i + 1) + ") " + nombres[i] + "  " + unidades[i] + " x " + precios[i] + " = " + linea);
+		}
+
+		System.out.println("------------------------------");
+		System.out.println("SUBTOTAL: " + subtotal);
+		System.out.println("DESC IMPORTE: " + descuento1);
+		System.out.println("DESC SOCIO: " + descuento2);
+		System.out.println("BASE: " + baseImponible);
+		System.out.println("IVA: " + iva);
+		System.out.println("TOTAL: " + total);
+		System.out.println("==============================");
+	}
 }
-
